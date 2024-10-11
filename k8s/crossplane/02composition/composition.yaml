@@ -14,7 +14,7 @@ spec:
       fromFieldPath: spec.resourceConfig.providerConfigName
       toFieldPath: spec.providerConfigRef.name
     - type: FromCompositeFieldPath
-      fromFieldPath: spec.resourceConfig.region
+      fromFieldPath: spec.region
       toFieldPath: spec.forProvider.region
   resources:
   - name: myvpc-crossplane-vpc
@@ -27,12 +27,14 @@ spec:
         forProvider:
           instanceTenancy: default
     patches:
-    - fromFieldPath: "spec.resourceConfig.region"
-      toFieldPath: "spec.forProvider.region"
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.region
+      toFieldPath: spec.forProvider.region
     - fromFieldPath: "spec.cidrBlock"
       toFieldPath: "spec.forProvider.cidrBlock"
-    - fromFieldPath: "spec.resourceConfig.region"
-      toFieldPath: "spec.forProvider.region"
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.resourceConfig.providerConfigName
+      toFieldPath: spec.providerConfigRef.name
 
   - name: myvpc-crossplane-igw
     base: 
@@ -45,7 +47,8 @@ spec:
           vpcIdRef:
             name: vpc-sample
     patches:
-    - fromFieldPath: "spec.resourceConfig.region"
+    - fromFieldPath: "spec.region"
       toFieldPath: "spec.forProvider.region"
-    - fromFieldPath: "spec.resourceConfig.region"
-      toFieldPath: "spec.forProvider.region"
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.resourceConfig.providerConfigName
+      toFieldPath: spec.providerConfigRef.name
