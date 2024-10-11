@@ -1,0 +1,28 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: myvpc.aws.k8s.io
+spec:
+  group: myvpc.aws.k8s.io
+  names:
+    kind: XVPC
+    plural: XVPCS
+  claimNames:
+    kind: cvpc
+    plural: cvpcs
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              region:
+                type: string 
+              cidrBlock:
+                type: string  
+            required: 
+              - region 
+              - cidrBlock
