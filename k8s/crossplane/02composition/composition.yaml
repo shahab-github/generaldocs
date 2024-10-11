@@ -1,0 +1,51 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: example
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  compositeTypeRef:
+    apiVersion: myvpc.aws.k8s.io/v1alpha1
+    kind: XVPC
+  patchSets:
+  - name: common-parameters
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.resourceConfig.providerConfigName
+      toFieldPath: spec.providerConfigRef.name
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.resourceConfig.region
+      toFieldPath: spec.forProvider.region
+  resources:
+  - name: myvpc-crossplane-vpc
+    base: 
+      apiVersion: ec2.aws.crossplane.io/v1beta1
+      kind: VPC
+      metadata:
+        name: vpc-sample
+      spec:
+        forProvider:
+          instanceTenancy: default
+    patches:
+    - fromFieldPath: "spec.resourceConfig.region"
+      toFieldPath: "spec.forProvider.region"
+    - fromFieldPath: "spec.cidrBlock"
+      toFieldPath: "spec.forProvider.cidrBlock"
+    - fromFieldPath: "spec.resourceConfig.region"
+      toFieldPath: "spec.forProvider.region"
+
+  - name: myvpc-crossplane-igw
+    base: 
+      apiVersion: ec2.aws.crossplane.io/v1beta1
+      kind: InternetGateway
+      metadata:
+        name: igw-sample
+      spec:
+        forProvider:
+          vpcIdRef:
+            name: vpc-sample
+    patches:
+    - fromFieldPath: "spec.resourceConfig.region"
+      toFieldPath: "spec.forProvider.region"
+    - fromFieldPath: "spec.resourceConfig.region"
+      toFieldPath: "spec.forProvider.region"
