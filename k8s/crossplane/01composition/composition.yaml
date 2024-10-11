@@ -7,7 +7,6 @@ spec:
   compositeTypeRef:
     apiVersion: myvpc.aws.k8s.io/v1alpha1
     kind: XVPC
-    
   patchSets:
   - name: common-parameters
     patches:
@@ -17,7 +16,6 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: spec.resourceConfig.region
       toFieldPath: spec.forProvider.region
-      
   resources:
   - name: myvpc-crossplane-vpc
     base: 
@@ -27,11 +25,12 @@ spec:
         name: vpc-sample
       spec:
         forProvider:
-          cidrBlock: 10.0.0.0/16
           instanceTenancy: default
     patches:
     - fromFieldPath: "spec.resourceConfig.region"
       toFieldPath: "spec.forProvider.region"
+    - fromFieldPath: "spec.cidrBlock"
+      toFieldPath: "spec.forProvider.cidrBlock"
 
   - name: myvpc-crossplane-igw
     base: 
@@ -42,7 +41,7 @@ spec:
       spec:
         forProvider:
           vpcIdRef:
-            name: sample-vpc
+            name: vpc-sample
     patches:
     - fromFieldPath: "spec.resourceConfig.region"
       toFieldPath: "spec.forProvider.region"
