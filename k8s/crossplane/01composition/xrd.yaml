@@ -1,12 +1,12 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: myvpc.aws.k8s.io
+  name: xvpcs.myvpc.example.com  # Changed to match the group and plural
 spec:
-  group: myvpc.aws.k8s.io
+  group: myvpc.example.com  # Changed group to avoid protected namespaces
   names:
     kind: XVPC
-    plural: XVPCS
+    plural: xvpcs  # Lowercase plural
   claimNames:
     kind: cvpc
     plural: cvpcs
@@ -22,9 +22,9 @@ spec:
             type: object
             properties:
               region:
-                type: string 
+                type: string
               cidrBlock:
-                type: string  
-            required: 
-              - region 
+                type: string
+            required:
+              - region
               - cidrBlock
