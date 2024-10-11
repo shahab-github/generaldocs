@@ -1,0 +1,38 @@
+
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xvpcs.myvpc.example.com
+spec:
+  group: myvpc.example.com
+  names:
+    kind: XVPC
+    plural: xvpcs
+  claimNames:
+    kind: cvpc
+    plural: cvpcs
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              region:
+                type: string
+              cidrBlock:
+                type: string
+              resourceConfig:
+                type: object
+                properties:
+                  providerConfigName:
+                    type: string
+                  # Other fields if needed
+            required:
+              - region
+              - cidrBlock
+              - resourceConfig
