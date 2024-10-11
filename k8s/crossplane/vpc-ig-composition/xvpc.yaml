@@ -1,0 +1,10 @@
+
+apiVersion: myvpc.example.com/v1alpha1
+kind: XVPC
+metadata:
+  name: my-composite-resource-xvpc
+spec:
+  region: us-east-1 # AWS region
+  cidrBlock: 10.0.0.0/16    # CIDR block for the VPC
+  resourceConfig:
+    providerConfigName: awsdefault
