@@ -1,0 +1,7 @@
+apiVersion: myvpc.aws.k8s.io/v1alpha1
+kind: XVPC
+metadata:
+  name: my-composite-resource-xvpc
+spec: 
+  region: us-east-1
+  cidr: "192.168.0.0/24"
