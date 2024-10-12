@@ -1,0 +1,9 @@
+apiVersion: myeks.example.com/v1alpha1
+kind: XOIDC
+metadata:
+  name: my-oidc
+spec:
+  clientId: spn:your-client-id
+  issuerUrl: https://sts.windows.net/your-tenant-id/
+  resourceConfig:
+    providerConfigName: default
