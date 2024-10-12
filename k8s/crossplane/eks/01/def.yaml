@@ -1,0 +1,37 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xoidcs.myeks.example.com
+spec:
+  group: myeks.example.com
+  names:
+    kind: XOIDC
+    plural: xoidcs
+  claimNames:
+    kind: coidc
+    plural: coidcs
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              clientId:
+                type: string
+              issuerUrl:
+                type: string
+              resourceConfig:
+                type: object
+                properties:
+                  providerConfigName:
+                    type: string
+                  # Other fields if needed
+            required:
+              - clientId
+              - issuerUrl
+              - resourceConfig
