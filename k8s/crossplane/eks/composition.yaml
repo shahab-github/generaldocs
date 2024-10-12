@@ -5,7 +5,7 @@ metadata:
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: myels.example.com/v1alpha1
+    apiVersion: myeks.example.com/v1alpha1
     kind: XOIDC
   patchSets:
   - name: common-parameters
