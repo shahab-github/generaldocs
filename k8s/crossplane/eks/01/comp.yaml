@@ -1,0 +1,50 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: eks-oidc
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  compositeTypeRef:
+    apiVersion: myeks.example.com/v1alpha1
+    kind: XOIDC
+  patchSets:
+    - name: common-parameters
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.resourceConfig.providerConfigName
+          toFieldPath: spec.providerConfigRef.name
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+  resources:
+    - name: myeks-oidc
+      base:
+        apiVersion: eks.aws.crossplane.io/v1alpha1
+        kind: IdentityProviderConfig
+        metadata:
+          name: azureAD
+        spec:
+          forProvider:
+            clusterNameRef:
+              name: demo-eks
+            oidc:
+              clientId: spn:example-client-id
+              groupsClaim: group
+              groupsPrefix: "aad:"
+              issuerUrl: https://sts.windows.net/example-tenant-id/
+              usernameClaim: upn
+            region: us-east-1
+          providerConfigRef:
+            name: "" # Will be patched
+      patches:
+        - fromFieldPath: "spec.issuerUrl"
+          toFieldPath: "spec.forProvider.oidc.issuerUrl"
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.clientId"
+          toFieldPath: "spec.forProvider.oidc.clientId"
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.resourceConfig.providerConfigName"
+          toFieldPath: "spec.providerConfigRef.name"
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.region"
+          toFieldPath: "spec.forProvider.region"
