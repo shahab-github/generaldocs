@@ -1,0 +1,19 @@
+apiVersion: eks.aws.crossplane.io/v1beta1
+kind: Cluster
+metadata:
+  name: demo-eks
+  annotations:
+    crossplane.io/external-name: demo-eks  # Matches the name of your existing EKS cluster in AWS
+spec:
+  forProvider:
+    region: us-east-1
+    roleArn: arn:aws:iam::058264141167:role/eksClusterRole  # Your provided IAM role ARN
+    version: "1.30"  # EKS version, adjust according to your cluster
+    resourcesVpcConfig:
+      securityGroupIds:
+        - sg-085da6cc33ace51c9  # Your provided security group
+      subnetIds:
+        - subnet-06f08e93ed1a9b21d  # Your first provided subnet
+        - subnet-0e1bd6476ef6a953d  # Your second provided subnet
+  providerConfigRef:
+    name: default
