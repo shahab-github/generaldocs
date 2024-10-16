@@ -1,0 +1,5 @@
+apiVersion: v2
+name: rbac # Required field (chart name)
+description: A Helm chart to manage Kubernetes RBAC for Azure AD groups
+version: 0.1.0                 # Required field (version number of your chart)
+appVersion: 1.0                # Optional field (application version)
