@@ -1,0 +1,10 @@
+groups:
+-  groupName: devops
+   roleName: cluster-admin
+   namespace: default
+-  groupName: developers
+   roleName: view
+   namespace: develop
+-  groupName: operations
+   roleName: edit
+   namespace: preprod
