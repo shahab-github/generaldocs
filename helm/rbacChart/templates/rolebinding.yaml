@@ -1,0 +1,16 @@
+{{- range .Values.groups }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ .name }}-rolebinding
+  namespace: {{ .namespace }}
+subjects:
+  - kind: Group
+    name: {{ .name }}                 # The Azure AD group name
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: {{ .name }}-role              # Refers to the Role created in role.yaml
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
