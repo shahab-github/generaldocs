@@ -1,0 +1,5 @@
+apiVersion: v2
+name: rolebinding
+description: A Helm chart to create RoleBindings for groups
+version: 0.1.0
+appVersion: 0.1.0
