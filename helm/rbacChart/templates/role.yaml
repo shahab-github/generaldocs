@@ -1,0 +1,14 @@
+{{- range .Values.groups }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .name }}-role
+  namespace: {{ .namespace }}
+rules:
+  {{- range .permissions }}
+  - apiGroups: {{ .apiGroups | toJson }}
+    resources: {{ .resources | toJson }}
+    verbs: {{ .verbs | toJson }}
+  {{- end }}
+{{- end }}
