@@ -1,0 +1,16 @@
+groups:
+  - name: groupA
+    namespace: ans
+    permissions:
+      - apiGroups: [""]
+        resources: ["pods"]
+        verbs: ["get", "watch", "list"]
+      - apiGroups: ["apps"]
+        resources: ["deployments"]
+        verbs: ["get", "list"]
+  - name: groupB
+    namespace: bns
+    permissions:
+      - apiGroups: [""]
+        resources: ["services"]
+        verbs: ["create", "update", "delete"]
