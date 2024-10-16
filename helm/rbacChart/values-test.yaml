@@ -1,0 +1,43 @@
+groups:
+  - name: groupA
+    namespace: ans
+    permissions:
+      - apiGroups: [""]
+        resources: ["pods"]
+        verbs: ["get", "watch", "list"]
+      - apiGroups: ["apps"]
+        resources: ["deployments"]
+        verbs: ["get", "list"]
+  - name: groupB
+    namespace: bns
+    permissions:
+      - apiGroups: [""]
+        resources: ["services"]
+        verbs: ["create", "update", "delete"]
+  - name: groupC
+    namespace: cns
+    permissions:
+      - apiGroups: [""]
+        resources: ["configmaps"]
+        verbs: ["get", "list", "create", "update", "delete"]
+      - apiGroups: ["apps"]
+        resources: ["statefulsets"]
+        verbs: ["get", "watch", "list"]
+  - name: groupD
+    namespace: dns
+    permissions:
+      - apiGroups: [""]
+        resources: ["secrets"]
+        verbs: ["get", "list", "create"]
+      - apiGroups: ["apps"]
+        resources: ["daemonsets"]
+        verbs: ["get", "list", "delete"]
+  - name: groupE
+    namespace: ens
+    permissions:
+      - apiGroups: [""]
+        resources: ["pods"]
+        verbs: ["create", "delete"]
+      - apiGroups: ["extensions"]
+        resources: ["replicasets"]
+        verbs: ["get", "list", "update"]
