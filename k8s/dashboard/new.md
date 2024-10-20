@@ -42,8 +42,8 @@ Click on the workload to view the pods, replicaset , deployments and more
 Click on the Network tab to view the resources like services, endpoints etc
 ![image](https://github.com/user-attachments/assets/92352121-2c72-4e1b-803c-226d39906fee)
 
-Click on the configuration tab to view the resources like configmap, secrets 
-![image](https://github.com/user-attachments/assets/77062390-b5ad-41d6-82cd-aa54c4232b53)
+Click on the configuration tab to view the resources like configmap, secrets etc.
+![image](https://github.com/user-attachments/assets/e2bf8820-ae80-4625-a451-63933b234100)
 
 
 
