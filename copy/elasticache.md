@@ -161,6 +161,21 @@ The following recovery procedures outline the steps to restore operations in cas
 - **Security Reviews:**
   - Regularly audit VPC, Security Groups, and IAM policies.
   - Keep encryption standards up-to-date.
+  - 
+
+  1. Automatic Failover
+With Multi-AZ enabled, ElastiCache is designed to handle an AZ failure automatically:
+
+Synchronous Replication:
+Each shard typically has a primary node in one AZ and one or more replicas in different AZs. Synchronous replication ensures that data is kept in sync.
+
+Automatic Promotion:
+If the primary node becomes unreachable due to an AZ failure, ElastiCache will automatically promote a replica from another healthy AZ to become the new primary. This failover process minimizes downtime.
+
+DNS Endpoint Management:
+The cluster’s endpoint remains the same; AWS manages the redirection to the newly promoted primary, so client applications usually do not need to change connection strings.
+
+
 
 ---
 
